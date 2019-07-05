@@ -1,0 +1,78 @@
+<ion-header no-shadow no-border class="store-home-header">
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-2 class="col-top-left">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-8 class="col-top-center">
+        <ion-title class="store-title">My XoomStores</ion-title>
+      </ion-col>
+      <!-- <ion-col col-2 class="col-top-right">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icons" (click)="navigateToPrefferedStore()">
+          <ion-icon name="search" ></ion-icon>
+        </button>
+        </ion-buttons>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content >
+  <!-- <super-tabs>
+    <super-tab [root]="partnerStore" title="Partner Store"></super-tab>
+    <super-tab [root]="preferredStore" title="Preferred Store"></super-tab>
+  </super-tabs> -->
+  <ion-segment class="store-list-segment" color="primary" [(ngModel)]="storeSegment" (ionChange)="segmentChanged($event)">
+    <!-- <ion-segment-button class="store-list-tab" value="patnerStore">
+      Patner Store
+    </ion-segment-button>
+    <ion-segment-button class="store-list-tab" value="preferredStore">
+      Preferred Store
+    </ion-segment-button> -->
+  </ion-segment>
+  <!-- <ion-slides class="store-list-slide" (ionSlideDidChange)="slideChanged()">
+    <ion-slide class="store-list-slide-item"> -->
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6 col-md-3 col-lg-3 *ngFor="let item of patnerStoreListFilterred | async" (click)="selectStore(item)">
+              <ion-card class="store-list-item">
+                <ion-row>
+                    <div [style.backgroundImage]="'url(' + item.logo + ')'" class="store-logo store-list-item-image"></div>
+                </ion-row>
+                <ion-card-content class="store-list-item-content">
+                  <ion-card-title class="store-list-item-title">{{ item.name }}</ion-card-title>
+                  <p class="store-list-item-desc">{{ item.address }}</p>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    <!-- </ion-slide>
+    <ion-slide class="store-list-slide-item">
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6 col-md-3 col-lg-3 *ngFor="let item of preferredStoreList | async" (click)="selectStore(item)">
+              <ion-card class="store-list-item">
+                <ion-row>
+                  <div [style.backgroundImage]="'url(' + item.logo + ')'" class="store-logo store-list-item-image"></div>
+                </ion-row>
+                <ion-card-content class="store-list-item-content">
+                  <ion-card-title class="store-list-item-title">{{ item.name }}</ion-card-title>
+                  <p class="store-list-item-desc">{{ item.address }}</p>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-slide>
+  </ion-slides> -->
+</ion-content>

@@ -1,0 +1,88 @@
+<ion-header no-shadow no-border class="store-home-header">
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-8 class="col-top-left">
+        <ion-title class="store-title">{{ storeName }}</ion-title>
+      </ion-col>
+      <ion-col col-4 class="col-top-right">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icons" [ngStyle]="{'background-color': primaryColor}" (click)="navigateToCart()">
+            <ion-badge class="store-notifications-badge" color="danger" [ngStyle]="{'background-color': secondaryColor , 'color':primaryColor}" *ngIf="cartCount > 0">{{ this.cartCoun t}}</ion-badge>
+            <ion-icon name="cart"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content scroll="false" class="store-list-wrapper">
+  <ion-list class="store-list-view" *ngFor="let item of shoppingItemList">
+    <div class="firebase-item-list">
+      <ion-item class="store-list-view-info">
+        <ion-title>
+          <h2 class="text-h2 store-list-view-title">{{ item.productName }}</h2>
+        </ion-title>
+        <ion-row>
+          <h3 class="text-h3 store-list-view-desc"> Total: {{ item.pickedQuantity == 0? item.quantity:item.pickedQuantity }} x {{ item.productSalesPrice }} : {{ calculateItemAmt(item) }}</h3>
+        </ion-row>
+        <ion-thumbnail item-right class="store-list-view-img">
+          <img [src]="item.productImg ? item.productImg:defaultThumbnail" />
+        </ion-thumbnail>
+      </ion-item>
+      <ion-row class="store-list-view-actions">
+        <ion-col col-10>
+          <span class="qty-label">Qty: </span>
+          <button class="store-list-btn-remove store-list-btn" [ngStyle]="{'background-color': primaryColor}" (click)="reduceItemQty(item)">-</button>
+          <ion-input type="number" class="store-list-view-qty " value="{{item.pickedQuantity == 0? item.quantity:item.pickedQuantity}}"></ion-input>
+          <button class="store-list-btn-add store-list-btn" [ngStyle]="{'background-color': primaryColor}" (click)="addItemQty(item)">+</button>
+        </ion-col>
+        <ion-col col-2>
+          <button class="store-list-btn-checkbox store-list-btn" (click)="moveToPickedItem(item)" *ngIf="item.addedToCart =='Y'">
+            <ion-icon name="checkbox"></ion-icon>
+          </button>
+          <button class="store-list-btn-checkbox store-list-btn" (click)="moveToPickedItem(item)" *ngIf="item.addedToCart !='Y'">
+            <ion-icon name="checkbox-outline"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+  <div class="row" *ngIf="!isSModeListEmpty">
+    <!-- <ion-fab class="col col-20" (click)="cancelInstoreShopping()">
+      <button ion-fab mini color="danger">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-fab> -->
+    <!-- <ion-fab class="col col-20" (click)="openWalmartSearch()">
+      <button ion-fab mini color="primary">
+        <ion-icon name="ios-create"></ion-icon>
+      </button>
+      </ion-fab>  -->
+    <!-- <ion-fab class="col col-20" (click)="pauseShopping()">
+      <button ion-fab mini color="secondary">
+        <ion-icon name="pause"></ion-icon>
+      </button>
+    </ion-fab> -->
+    <ion-fab class="col col-20 store-view-finish" (click)="finishShopping()">
+      <button ion-fab mini color="primary">
+        <ion-icon name="checkbox"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab class="col col-20 store-view-remove" (click)="clearShoppingMode()">
+      <button ion-fab mini>
+        <ion-icon name="remove-circle"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab class="col col-20 store-view-scan" (click)="scanWalmartCode()">
+      <button ion-fab mini color="dark">
+        <ion-icon name="qr-scanner"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab class="col col-20 store-view-reset" (click)="resetShoppingMode()">
+      <button ion-fab mini>
+        <ion-icon name="refresh-circle"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+</ion-content>

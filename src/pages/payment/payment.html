@@ -1,0 +1,112 @@
+<!--
+  Generated template for the PaymentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-shadow no-border class="store-home-header">
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-2 class="col-top-left">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-8 class="col-top-center">
+        <ion-title class="store-title">Payment</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+    <div radio-group>
+        
+    <form action="/" method="post" id="payment-form" (tap)="resetCardInfo();">
+      <label class="card-content-name ">
+          <ion-radio value="1"  class="card-content-radio" [checked]="!payWithExistingCard"></ion-radio>
+          New Card
+        </label>
+
+      <input type="hidden" name="token" />
+    <div class="group margin-top-10">
+      <label>
+        <span>Card number</span>
+        <div id="card-number-element" class="field"></div>
+      </label>
+      <label>
+        <span>Expiry date</span>
+        <div id="card-expiry-element" class="field"></div>
+      </label>
+      <label>
+        <span>CVC</span>
+        <div id="card-cvc-element" class="field"></div>
+      </label>
+      <label>
+        <span>Postal code</span>
+        <input id="postal-code" name="postal_code" class="field StripeElement "  placeholder="90210" />
+      </label>
+      <label>
+        <span>Save Card</span>
+        <ion-checkbox color="primary" class="save-card-checkbx"  name="save_card" [(ngModel)]="rememberMe"></ion-checkbox>
+        <!-- <input id="save-card" name="save_card" class="save-card-checkbx"  type="checkbox" /> -->
+      </label>
+    </div> 
+    <div *ngIf="!payWithExistingCard">
+        <button ion-button block color="danger">Pay ${{cartInfo.amount}}</button>
+        <div class="outcome">
+            <div class="error"></div>
+            <div class="success">
+              Success! Your Stripe token is <span class="token"></span>
+            </div>
+          </div>
+    </div>
+  </form>
+  
+      <ion-card *ngFor="let card of saveCardsList" class="saved-cards">
+
+          <ion-card-header>
+            
+            
+            <label class="card-content-name">
+              <ion-radio value="{{card.id}}" [checked]="payWithExistingCard && sourceId == card.id" (click)="setCardInfo(card.id, card.customer)" class="card-content-radio"></ion-radio>
+              {{ card.brand }}
+            </label>
+             
+          </ion-card-header>
+        
+          <ion-card-content class="card-content-number">
+            <!-- Add card content here! -->
+            xxxx-xxxx-xxxx-{{ card.last4 }}
+            
+          </ion-card-content>
+
+          <ion-row class="cardfooter">
+              <ion-col>
+                  <div *ngIf="payWithExistingCard && sourceId == card.id">
+                    <!--<button ion-button block color="danger" (tap)="pay(null,card.id)">Pay ${{cartInfo.amount}}</button>-->
+                    <button ion-button block color="danger" (click)="paywithsavedcard(card, card.id)">Pay ${{cartInfo.amount}}</button>
+                      <div class="outcome">
+                          <div class="error"></div>
+                          <div class="success">
+                            Success! Your Stripe token is <span class="token"></span>
+                          </div>
+                        </div>
+                  </div>
+              </ion-col>
+            </ion-row>
+
+         
+        
+        </ion-card>
+
+  </div>
+     
+
+          
+        
+    
+</ion-content>
+

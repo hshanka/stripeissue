@@ -1,0 +1,72 @@
+<ion-header no-shadow no-border class="store-home-header">
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-2 class="col-top-left">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-8 class="col-top-center">
+        <ion-title class="store-title">Store Receipts</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+  <ion-list class="store-cart-list" *ngFor="let item of recieptListArray">
+    <div>
+      <ion-row class="store-cart-header" [ngStyle]="{'background-color': item.store.primaryColor}">
+        <ion-col col-2>
+          <img [src]="item.store.logo ? item.store.logo:defaultThumbnail" class="store-cart-thumbnail" />
+        </ion-col>
+        <ion-col col-6>
+          <h2 class="text-h2 cart-item-title">{{ item.store.storeName }}</h2>
+          <!-- <h3 class="cart-item-amount">Total: {{ item.store.storeTotalAmount }}</h3> -->
+        </ion-col>
+        <ion-col col-4 class="store-cart-quick-actions">
+          <!-- <button class="store-list-btn-alt" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="openItemCustomNotes('S', item)">
+            <ion-icon name="text"></ion-icon>
+          </button>
+          <button class="store-list-btn-alt" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="attachPrescription('CS', item)">
+            <ion-icon name="attach"></ion-icon>
+          </button> -->
+        </ion-col>
+      </ion-row>
+      <ion-grid>
+        <ion-card class="store-order-list">
+          <ion-card-content>
+            <ion-row class="store-order-item">
+              <ion-col col-50 class="store-order-title">Receipt No:</ion-col>
+              <ion-col col-50 class="store-order-desc">{{ item.receiptList.receiptsId }}</ion-col>
+            </ion-row>
+            <ion-row class="store-order-item">
+              <ion-col col-50 class="store-order-title">Date:</ion-col>
+              <ion-col col-50 class="store-order-desc">{{ item.receiptList.createdDateTime | moment:'MM-DD-YYYY HH:mm'}}</ion-col>
+            </ion-row>
+            <ion-row class="store-order-item">
+              <ion-col col-50 class="store-order-title">Order Amount:</ion-col>
+              <ion-col col-50 class="store-order-desc">{{ item.receiptList.amount }}</ion-col>
+            </ion-row>
+            <ion-row class="store-order-item">
+              <ion-col col-50 class="store-order-title">Number of items:</ion-col>
+              <ion-col col-50 class="store-order-desc">{{ item.receiptList.numberOfItems }}</ion-col>
+            </ion-row>
+            <ion-row>
+              <button class="store-action-btn" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="navigateToRecieptPage(item)">View</button>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-grid>
+    </div>
+  </ion-list>
+  <!-- <div class="row">
+    <ion-fab class="col col-20 store-view-scan" (click)="search()">
+      <button ion-fab mini color="dark">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-fab>
+  </div> -->
+</ion-content>

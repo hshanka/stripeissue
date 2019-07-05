@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="ion-custom-content">
+    <form [formGroup]="profileForm">
+      <div class="sub-heading">First Name</div>
+      <ion-input type="text" value="a" formControlName="firstName" [class.invalid]="!profileForm.controls.firstName.valid && (profileForm.controls.firstName.dirty)"></ion-input>
+      <div *ngIf="!profileForm.controls.firstName.valid && (profileForm.controls.firstName.dirty)">
+        <p>First name is required.</p>
+      </div>
+      <div class="sub-heading">Last Name</div>
+      <ion-input type="text" value="a" formControlName="lastName" [class.invalid]="!profileForm.controls.lastName.valid && (profileForm.controls.lastName.dirty)"></ion-input>
+      <div *ngIf="!profileForm.controls.lastName.valid && (profileForm.controls.lastName.dirty)">
+        <p>Last name is required.</p>
+      </div>
+      <div class="sub-heading">Phone</div>
+      <ion-input type="number" value="1" formControlName="phone" [class.invalid]="!profileForm.controls.phone.valid && (profileForm.controls.phone.dirty)"></ion-input>
+      <div *ngIf="!profileForm.controls.phone.valid && (profileForm.controls.phone.dirty)">
+        <p>Phone Number is required.</p>
+      </div>
+      <div class="sub-heading">Date of Birth</div>
+      <ion-item>
+        <ion-datetime displayFormat="MM/DD/YYYY" formControlName="dateOfBirth"></ion-datetime>
+      </ion-item>
+      <button ion-button block class="ion-button-custom" (click)="saveProfile()" [disabled]="!profileForm.valid">Next</button>
+    </form>
+  </div>
+</ion-content>

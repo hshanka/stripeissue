@@ -1,0 +1,56 @@
+<ion-header no-shadow no-border class="store-map-header">
+  <ion-grid class="store-map-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-2 class="col-top-left">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-8 class="col-top-center">
+        <input class="store-map-search" [(ngModel)]="autocomplete.query" placeholder="Search Store..." type="text">
+      </ion-col>
+      <ion-col col-2 class="col-top-right">
+        <ion-buttons class="store-button-icons">
+          <button ion-button class="store-icons" (click)="updateSearch()">
+            <ion-icon name="search"></ion-icon>
+            <!-- <ion-icon name="close-circle" *ngIf ="isAddstore"></ion-icon> -->
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content class="store-map-content">
+  <div #map id="map" class="store-map"></div>
+  <ion-grid class="store-map-wrapper">
+    <ion-row>
+      <ion-col col-12 class="store-map-container">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="isStoreselected">
+    <ion-fab bottom right class="store-map-fab store-map-fab-alt">
+      <button ion-fab mini class="store-map-add" (click)="addToPreferredStore()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
+  <div *ngIf="storeStatus == 'profile'">
+    <ion-row>
+      <ion-col col-8>
+        Select Stores Later ?
+      </ion-col>
+      <ion-col col-4 (click)="skipStoreSelection()">
+        SKIP
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-fab bottom right class="store-map-fab">
+    <button ion-fab mini class="store-map-geo" (click)="getGeolocation()">
+      <ion-icon name="locate"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

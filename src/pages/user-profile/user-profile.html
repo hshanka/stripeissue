@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>User Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <ion-title>Link Account</ion-title>
+    <button ion-button block round (click)="fbLink()">Facebook</button>
+    <button ion-button block round color="secondary" (click)="googleLink()">Google</button>
+    <button ion-button block round color="dark" (click)="emailLink()">Email</button>
+  </div>
+  <div class="login-form-body" *ngIf="emailLinking">
+    <div class="form-group">
+      <ion-input type="email" class="form-control" placeholder="Email" [(ngModel)]="account.email"></ion-input>
+    </div>
+    <div class="form-group">
+      <ion-input type="password" class="form-control" placeholder="Password" [(ngModel)]="account.password"></ion-input>
+    </div>
+    <div class="form-action">
+      <button ion-button block class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" (click)="linkUser()">Link</button>
+    </div>
+  </div>
+</ion-content>

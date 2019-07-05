@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Sign Up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="ion-custom-content">
+    <div class="sub-heading">Email</div>
+    <ion-input type="email" [(ngModel)]="account.email"></ion-input>
+    <div class="sub-heading">Password</div>
+    <ion-input type="password" [(ngModel)]="account.password"></ion-input>
+    <div class="sub-heading">Confirm Password</div>
+    <ion-input type="password" [(ngModel)]="this.confirmpassword"></ion-input>
+    <button class="ion-button-custom" ion-button block (click)="register()">Register</button>  
+    <div class="terms-policy">By registering,you automatically accept the <span>Terms & Policy</span> of XoomCart.</div>
+    <div class="redirect-login" (click)="goBackToLogin()">Have account? Log In </div>
+  </div>
+</ion-content>

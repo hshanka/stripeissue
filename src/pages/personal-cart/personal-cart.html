@@ -1,0 +1,175 @@
+<ion-header no-shadow no-border class="store-home-header">
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-2 class="col-top-left">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-8 class="col-top-center">
+        <ion-title class="store-title">{{ pageTitle }}</ion-title>
+      </ion-col>
+      <ion-col col-2 class="col-top-right">
+        <!-- <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icons" (click)="showCurbSideCart()" *ngIf="isInstore">
+            <ion-icon name="basket"></ion-icon>
+          </button>
+          <button ion-button icon-only class="store-icons" (click)="showInstoreCart()" *ngIf="isCurbside">
+            <ion-icon name="walk"></ion-icon>
+          </button>
+        </ion-buttons> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="isCurbside">
+    <ion-list class="store-cart-list" *ngFor="let item of curbSideItemStoreList">
+      <div>
+        <ion-row class="store-cart-header" [ngStyle]="{'background-color': item.store.primaryColor}">
+          <ion-col col-2>
+            <img [src]="item.store.logo ? item.store.logo:defaultThumbnail" class="store-cart-thumbnail" />
+          </ion-col>
+          <ion-col col-6>
+            <h2 class="text-h2 cart-item-title">{{ item.store.storeName }}</h2>
+            <h3 class="cart-item-amount">Total: {{ item.store.storeTotalAmount }}</h3>
+          </ion-col>
+          <ion-col col-4 class="store-cart-quick-actions">
+            <button class="store-list-btn-alt" [class.store-list-checkout]="!item.store.storeSelected" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="selectStoreForCheckout('CS', item)">
+              <ion-icon name="checkmark"></ion-icon>
+            </button>
+            <button class="store-list-btn-alt" [class.pulse-animation]="item.store.storeCustomNote != ''" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="openItemCustomNotes('S', item)">
+              <ion-icon name="text"></ion-icon>
+            </button>
+            <button class="store-list-btn-alt pulse-animation" [class.pulse-animation]="attachment != ''" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="attachPrescription('CS', item)">
+              <ion-icon name="attach"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-list class="store-list-view" *ngFor="let pdtItem of item.productList">
+          <div class="firebase-item-list">
+            <ion-item class="store-list-view-info">
+              <ion-row>
+                <h2 class="text-h2 store-list-view-title">{{ pdtItem.productName }}</h2>
+              </ion-row>
+              <ion-thumbnail item-right class="store-list-view-img">
+                <img [src]="pdtItem.productImg ? pdtItem.productImg:defaultThumbnail" />
+              </ion-thumbnail>
+              <!-- <ion-row>
+              <h3 class="text-h3">Quantity: {{ item.productList.pickedQuantity == 0? item.quantity:item.pickedQuantity }}</h3>
+            </ion-row> -->
+            </ion-item>
+            <ion-row class="store-list-view-actions">
+              <ion-col col-12>
+                <span class="qty-label">Qty: </span>
+                <button class="store-list-btn-remove store-list-btn" [ngStyle]="{'background-color': item.store.primaryColor}" (click)="reduceItemQty('CS', pdtItem)">-</button>
+                <ion-input type="number" class="store-list-view-qty" value="{{pdtItem.productQty}}" disabled></ion-input>
+                <button class="store-list-btn-add store-list-btn" [ngStyle]="{'background-color': item.store.primaryColor}" (click)="addItemQty('CS', pdtItem)">+</button>
+              </ion-col>
+            </ion-row>
+            <ion-item class="store-cart-content">
+              <h3 class="text-h3 store-cart-desc">
+                Amount: {{ pdtItem.productSalesPrice | toFixed }} x {{ pdtItem.productQty }} = {{ pdtItem.productAmount }}
+              </h3>
+            </ion-item>
+            <ion-row class="store-cart-action-btn">
+              <ion-col>
+                <button class="store-list-btn-alt" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="deleteItemsFromCurbsideList('CS', pdtItem)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+                <button class="store-list-btn-alt" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="openItemCustomNotes('P', pdtItem)">
+                  <ion-icon name="text"></ion-icon>
+                </button>
+                <span class="cart-stock-msg" *ngIf="pdtItem.QtyOnHand == 0">
+                  OUT OF STOCK
+                </span>
+                <span class="cart-stock-msg" *ngIf="pdtItem.QtyOnHand > 0 && pdtItem.QtyOnHand < pdtItem.productQty">
+                  {{ pdtItem.QtyOnHand }} items remaining
+                </span>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-list>
+      </div>
+    </ion-list>
+    <ion-row *ngIf="isCheckout && curbSideItemStoreList.length > 0">
+      <ion-col class="tax-note">
+        Tax will be applied during payment at counter
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="isCheckout && curbSideItemStoreList.length > 0">
+      <ion-col>
+        <button ion-button block color="danger" (click)="cartCheckout('CS')">Checkout</button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="isInstore">
+    <ion-list class="store-cart-list" *ngFor="let item of instoreItemStoreList">
+      <div>
+        <ion-row class="store-cart-header" [ngStyle]="{'background-color': item.store.primaryColor}">
+          <ion-col col-2>
+            <img [src]="item.store.logo ? item.store.logo:defaultThumbnail" class="store-cart-thumbnail" />
+          </ion-col>
+          <ion-col col-6>
+            <h2 class="text-h2 cart-item-title">{{ item.store.storeName }}</h2>
+            <h3 class="cart-item-amount">Total: {{ item.store.storeTotalAmount }}</h3>
+          </ion-col>
+          <ion-col col-4 class="store-cart-quick-actions">
+            <button class="store-list-btn-alt" [class.store-list-checkout]="!item.store.storeSelected" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="selectStoreForCheckout('IS', item)">
+              <ion-icon name="checkmark"></ion-icon>
+            </button>
+            <button class="store-list-btn-alt" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="openItemCustomNotes('S', item)">
+              <ion-icon name="text"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-list class="store-list-view" *ngFor="let pdtItem of item.productList">
+          <div class="firebase-item-list">
+            <ion-item class="store-list-view-info">
+              <ion-row>
+                <h2 class="text-h2 store-list-view-title">{{ pdtItem.productName }}</h2>
+              </ion-row>
+              <ion-thumbnail item-right class="store-list-view-img">
+                <img [src]="pdtItem.productImg ? pdtItem.productImg:defaultThumbnail" />
+              </ion-thumbnail>
+              <!-- <ion-row>
+                <h3 class="text-h3">Quantity: {{ item.productList.pickedQuantity == 0? item.quantity:item.pickedQuantity }}</h3>
+              </ion-row> -->
+            </ion-item>
+            <ion-row class="store-list-view-actions">
+              <ion-col col-12>
+                <span class="qty-label">Qty: </span>
+                <button class="store-list-btn-remove store-list-btn" [ngStyle]="{'background-color': item.store.primaryColor}" (click)="reduceItemQty('IS', pdtItem)">-</button>
+                <ion-input type="number" class="store-list-view-qty" value="{{pdtItem.productQty}}" disabled></ion-input>
+                <button class="store-list-btn-add store-list-btn" [ngStyle]="{'background-color': item.store.primaryColor}" (click)="addItemQty('IS', pdtItem)">+</button>
+              </ion-col>
+            </ion-row>
+            <ion-item class="store-cart-content">
+              <h3 class="text-h3 store-cart-desc">
+                Amount: {{pdtItem.productSalesPrice | toFixed}} x {{pdtItem.productQty}} = {{pdtItem.productAmount}}
+              </h3>
+            </ion-item>
+            <ion-row class="store-cart-action-btn">
+              <ion-col>
+                <button class="store-list-btn-alt" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="deleteItemsFromCurbsideList('IS', pdtItem)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+                <button class="store-list-btn-alt" [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="openItemCustomNotes('P', pdtItem)">
+                  <ion-icon name="text"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-list>
+      </div>
+    </ion-list>
+    <ion-row *ngIf="isCheckout && instoreItemStoreList.length > 0">
+      <ion-col>
+        <button ion-button block color="danger" (click)="cartCheckout('IS')">Checkout</button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

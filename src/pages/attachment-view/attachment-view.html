@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-grid>
+    <ion-row class="top-wrapper">
+      <ion-col col-10 class="col-top-center">
+        Attachment
+      </ion-col>
+      <ion-col col-2 class="col-top-right">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="cancelAttachmentView()">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <img [src]="attachment">
+  </div>
+</ion-content>

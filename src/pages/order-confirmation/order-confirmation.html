@@ -1,0 +1,112 @@
+<ion-header no-shadow no-border class="store-home-header">
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-2 class="col-top-left">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-8 class="col-top-center">
+        <ion-title class="store-title">Payment List</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+  <ion-list class="store-cart-list" *ngFor="let item of storeSelectedList">
+    <div>
+      <ion-row class="store-cart-header" [ngStyle]="{'background-color': item.store.primaryColor}">
+        <ion-col col-2>
+          <img [src]="item.store.logo ? item.store.logo:defaultThumbnail" class="store-cart-thumbnail" />
+        </ion-col>
+        <ion-col col-8>
+          <h2 class="text-h2 cart-item-title">{{ item.store.storeName }}</h2>
+          <h3 class="cart-item-amount">Total: {{ item.store.storeTotalAmount }}</h3>
+        </ion-col>
+        <ion-col col-2 class="store-cart-quick-actions">
+          <button [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="openItemCustomNotes('S', item)" class="store-list-btn-alt">
+            <ion-icon name="text"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-card class="order-detail-item" *ngFor="let pdtItem of item.productList">
+            <ion-card-content>
+              <ion-row>
+                <ion-col col-6 class="order-detail-image">
+                  <img [src]="pdtItem.productImg ? pdtItem.productImg:defaultThumbnail" />
+                </ion-col>
+                <ion-col col-6 class="order-detail-info">
+                  <ion-row class="order-detail-info-top">
+                    <ion-col col-6>
+                    </ion-col>
+                    <ion-col col-6>
+                      <button (click)="openItemCustomNotes('P', pdtItem)" class="store-list-btn order-detail-chat">
+                        <ion-icon name="text"></ion-icon>
+                      </button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="order-detail-info-bottom">
+                    <ion-col class="order-detail-product">{{ pdtItem.productName }}</ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+              <ion-row class="order-detail-content">
+                <ion-col>
+                  <ion-row>
+                    <ion-col col-6 class="order-detail-title">Qty:</ion-col>
+                    <ion-col col-6 class="order-detail-desc">{{ pdtItem.productQty }}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-6 class="order-detail-title">Amount:</ion-col>
+                    <ion-col col-6 class="order-detail-desc">{{ pdtItem.productSalesPrice | toFixed }} x {{ pdtItem.productQty }} = {{ pdtItem.productAmount | toFixed }}</ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-list>
+  <ion-row *ngIf="storeSelectedList">
+    <ion-col col-12>
+      <ion-card *ngFor="let card of savedCardsList" class="saved-cards">
+
+        <ion-card-header>
+          
+          
+          <label class="card-content-name">
+            <ion-radio value="{{card.id}}" [checked]="true" class="card-content-radio"></ion-radio>
+            {{ card.brand }}
+          </label>
+           
+        </ion-card-header>
+      
+        <ion-card-content class="card-content-number">
+          <!-- Add card content here! -->
+          xxxx-xxxx-xxxx-{{ card.last4 }}
+          
+        </ion-card-content>
+
+       
+      
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="storeSelectedList">
+    <ion-col class="tax-note">
+      Tax will be applied during payment at counter
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="storeSelectedList">
+    <ion-col>
+      <button ion-button block color="danger" (click)="saveOrders(0)" [disabled]="!isOrdered">Order</button>
+      <!-- <button ion-button block color="danger" (click)="showPaymentPage(0)" [disabled]="!isOrdered">Pay Now</button> -->
+    </ion-col>
+  </ion-row>
+</ion-content>

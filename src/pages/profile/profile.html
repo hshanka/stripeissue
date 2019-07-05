@@ -1,0 +1,35 @@
+
+<ion-content no-bounce>
+  <ion-grid class="profile-wrapper">
+    <ion-row >
+      <ion-card class="profile-container">
+        <ion-card-content>
+          <ion-row>
+            <ion-col class="profile-avatar">
+              <img src="assets/imgs/avatar.png" >
+            </ion-col>
+          </ion-row>
+         
+          <div class="profile-seperator">
+            <div class="mask"></div>
+          </div>
+          <ion-row class="profile-user-info">
+            <ion-col>
+
+  
+              <ion-row>
+                <ion-col class="profile-user-link" (click)="navigateToAddPayments()">
+                  Payment
+                  <span>
+                    <ion-icon name="arrow-forward"></ion-icon>
+                  </span>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

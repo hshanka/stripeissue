@@ -1,0 +1,199 @@
+page-store-home {
+  .store-home-grid {
+    height: 100% !important;
+    -webkit-box-shadow: 0px 1px 8px 0px rgba(87, 3, 87, 1);
+    -moz-box-shadow: 0px 1px 8px 0px rgba(87, 3, 87, 1);
+    box-shadow: 0px 1px 8px 0px rgba(87, 3, 87, 1);
+    padding: 0;
+  }
+  .home-list-scroll {
+    height: 20em;
+  }
+  .logo-wrapper,
+  .title-wrapper {
+    margin-top: 2rem;
+    padding: 0 5px;
+  }
+  .col-top-right {
+    text-align: right;
+  }
+  .store-home-header {
+    background-size: cover;
+  }
+  .store-button-icons {
+    display: inline-block;
+  }
+  .store-title {
+    margin: 0 auto;
+    color: #4209b5;
+  }
+  .coupon-wrapper {
+    background: #fff;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    padding: 0 5px;
+    border-top: 1px solid #fae2e5;
+  }
+  .coupon-wrapper .col-coupon-left h4 {
+    line-height: 32px;
+    font-size: 1.5rem;
+  }
+  .coupon-wrapper .col-coupon-right {
+    text-align: right;
+  }
+  .coupon-wrapper img {
+    height: 32px;
+    padding-right: 10px;
+  }
+  .card-wrapper {
+    padding: 0;
+  }
+  .store-home-title {
+    padding: 10px 10px 5px;
+  }
+  .store-home-title h5 {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.4rem;
+  }
+  .store-home-title span {
+    float: right;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #4209b5
+  }
+  .store-home-title span ion-icon {
+    padding-left: 5px;
+    vertical-align: middle;
+  }
+  .store-home-card,
+  .store-home-card ion-row,
+  .store-home-card ion-col {
+    padding: 0;
+  }
+  .store-home-card ion-row {
+    height: 100%;
+  }
+  .store-home-card {
+    height: 7.5rem;
+  }
+  .store-home-img {
+    border-bottom: 1px solid #ccc;
+  }
+  .store-home-img ion-col {
+    padding: 0;
+  }
+  .store-home-desc {
+    padding: 5px 10px 0 !important;
+  }
+  .store-home-desc ion-card-title {
+    font-weight: 900;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: 2px 0;
+  }
+  .store-home-desc p {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 5px 0;
+  }
+  .store-price-discount {
+    font-size: 1rem;
+    font-weight: 400;
+    color: 666;
+    text-decoration: line-through;
+  }
+  .store-item-add {
+    margin: 0;
+    height: 100%;
+    //height: 50%;  FIXME: changed for rp-build
+    width: 100%;
+    border-radius: 0;
+  }
+  ion-scroll[scrollX] {
+    white-space: nowrap;
+    .scroll-item {
+      display: inline-block;
+    }
+  }
+  .store-home-fab .store-icons {
+    margin: 6px;
+    font-size: 1.2rem !important;
+  }
+  .store-home-fab[right] {
+    left: 10px;
+  }
+  .store-home-fab[top] {
+    top: 0px;
+  }
+  .text-input {
+    text-align: center;
+  }
+  .card p {
+    white-space: normal;
+    max-height: 5.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .home-master-list {
+    padding: 0 5px;
+  }
+  @media screen and (max-width: 360px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    .store-home-header {
+      // background-color: darkseagreen;
+      height: 45%;
+    }
+    .store-icons {
+      font-size: 1.4rem !important;
+      width: 2.4em !important;
+      height: 2.4em !important;
+    }
+  }
+  @media screen and (max-width: 410px) and (min-width: 361px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    .store-home-header {
+      // background-color: darkseagreen;
+      height: 45%;
+    }
+  }
+  @media screen and (max-width: 640px) and (min-width: 481px) {
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    .store-home-header {
+      // background-color: blue;
+      height: 45%;
+    }
+  }
+  @media screen and (max-width: 480px) and (min-width: 410px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    .store-home-header {
+      // background-color: darkseagreen;
+      height: 45%;
+    }
+  }
+  @media screen and (max-width: 960px) and (min-width: 641px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+    .store-home-header {
+      // background-color: cyan;
+      height: 45%;
+    }
+    .home-list-scroll {
+      height: 30em;
+    }
+  }
+  @media screen and (max-width: 1025px) and (min-width: 961px) {
+    /* big landscape tablets, laptops, and desktops */
+    .store-home-header {
+      // background-color: cyan;
+      height: 45%;
+    }
+    .home-list-scroll {
+      height: 40em;
+    }
+  }
+}

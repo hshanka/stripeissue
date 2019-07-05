@@ -1,0 +1,19 @@
+<ion-content padding>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 col-md-3 col-lg-3 *ngFor="let item of patnerStoreListFilterred | async" (click)="selectStore(item)">
+          <ion-card class="store-list-item">
+            <ion-row>
+              <div class="store-logo store-list-item-image" [style.backgroundImage]="'url(' + item.logo + ')'"></div>
+            </ion-row>
+            <ion-card-content class="store-list-item-content">
+              <ion-card-title class="store-list-item-title">{{ item.name }}</ion-card-title>
+              <p class="store-list-item-desc">{{ item.address }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,99 @@
+page-store-master-list {
+  .card-wrapper {
+    padding: 0;
+  }
+  .store-home-title {
+    padding: 10px 10px 5px;
+    h5 {
+      font-weight: 600;
+      color: #333;
+      font-size: 1.4rem;
+    }
+     span {
+      float: right;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #4209b5
+      ion-icon {
+        padding-left: 5px;
+        vertical-align: middle;
+      }
+    }
+  }
+  .store-home-card,
+  .store-home-card ion-row,
+  .store-home-card ion-col {
+    padding: 0;
+  }
+  .store-home-card ion-row {
+    height: 100%;
+  }
+  .store-home-card {
+    height: 7.5rem;
+  }
+  .store-home-img {
+    border-bottom: 1px solid #ccc;
+    ion-col {
+      padding: 0;
+    }
+  }
+  .store-home-desc {
+    padding: 5px 10px 0 !important;
+  }
+  .store-home-desc ion-card-title {
+    font-weight: 900;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: 2px 0;
+  }
+  .store-home-desc p {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 5px 0;
+  }
+  .store-price-discount {
+    font-size: 1rem;
+    font-weight: 400;
+    color: 666;
+    text-decoration: line-through;
+  }
+  .store-item-add {
+    margin: 0;
+    height: 100%;
+    //height: 50%;  FIXME: changed for rp-build
+    width: 100%;
+    border-radius: 0;
+  }
+  ion-scroll[scrollX] {
+    white-space: nowrap;
+    .scroll-item {
+      display: inline-block;
+    }
+  }
+  .store-home-fab .store-icons {
+    margin: 6px;
+    font-size: 1.2rem !important;
+  }
+  .store-home-fab[right] {
+    left: 10px;
+  }
+  .store-home-fab[top] {
+    top: 0px;
+  }
+  .text-input {
+    text-align: center;
+  }
+  .card p {
+    white-space: normal;
+    max-height: 5.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .home-master-list {
+    padding: 0 5px;
+  }
+}

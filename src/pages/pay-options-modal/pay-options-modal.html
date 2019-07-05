@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-grid>
+    <ion-row class="top-wrapper">
+      <ion-col col-10 class="col-top-left">
+      </ion-col>
+      <ion-col col-2 class="col-top-right">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="cancelPayOptions()">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="danger" (click)="selectedOption('O')">Online Payment</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="danger" (click)="selectedOption('C')">Counter Payment</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,68 @@
+<!--
+  Generated template for the AddCardsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Save A New Card</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+
+  
+  <form action="/" method="post" id="payment-form" >
+    <input type="hidden" name="token" />
+    <div class="group margin-top-10">
+      <label>
+        <span>Card number</span>
+        <div id="card-number-element" class="field"></div>
+      </label>
+      <label>
+        <span>Expiry date</span>
+        <div id="card-expiry-element" class="field"></div>
+      </label>
+      <label>
+        <span>CVC</span>
+        <div id="card-cvc-element" class="field"></div>
+      </label>
+      <label>
+        <span>Postal code</span>
+        <input id="postal-code" name="postal_code" class="field StripeElement "  placeholder="90210" />
+      </label>
+    </div>
+  
+    <div >
+        <button ion-button block color="danger">Save Card</button>
+        <div class="outcome">
+            <div class="error"></div>
+            <div class="success">
+              Success! Your Stripe token is <span class="token"></span>
+            </div>
+          </div>
+    </div>
+  </form>
+  </div>
+  <div>
+    <ion-card *ngFor="let card of savedCardsList" class="saved-cards">
+      <ion-card-header>
+        <label class="card-content-name">
+          <ion-radio value="{{card.id}}" [checked]="true"  class="card-content-radio"></ion-radio>
+          {{ card.brand }}
+        </label>
+         
+      </ion-card-header>
+    
+      <ion-card-content class="card-content-number">
+        <!-- Add card content here! -->
+        xxxx-xxxx-xxxx-{{ card.last4 }}
+        
+      </ion-card-content>
+
+      
+    </ion-card>
+  </div>
+</ion-content>

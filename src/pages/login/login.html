@@ -1,0 +1,22 @@
+<ion-content class="login-wrapper">
+  <div class="login-logo">
+    <img class="login-logo-img" src="assets/imgs/icon.png">
+  </div>
+  <h3 class="login-title">Sign In </h3>
+  <div class="login-form-body">
+    <div class="form-group">
+      <ion-input type="email" class="form-control" placeholder="Email" [(ngModel)]="account.email"></ion-input>
+    </div>
+    <div class="form-group">
+      <ion-input type="password" class="form-control" placeholder="Password" [(ngModel)]="account.password"></ion-input>
+    </div>
+    <div class="form-action">
+      <button ion-button block class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" (click)="loginUser()"> Login </button>
+    </div>
+    <div class="login-account">Don't have an account yet? <span class="account-link" (click)="navigateToRegisterPage()">Sign Up</span></div>
+  </div>
+  <!-- <div padding>
+    <button ion-button block class="loginBtn loginBtn--facebook" (click)="Fblogin()">Login with Facebook</button>
+    <button ion-button block class="loginBtn loginBtn--google" (click)="Googlelogin()">Login with Google</button>
+  </div> -->
+</ion-content>

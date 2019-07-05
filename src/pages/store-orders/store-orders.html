@@ -1,0 +1,61 @@
+<ion-header class="store-home-header" no-shadow no-border>
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-12 class="col-top-center">
+        <ion-title class="store-title">Open Curbside Orders</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngFor="let item of orderListArray" class="store-cart-list">
+    <div>
+      <ion-row class="store-cart-header" [ngStyle]="{'background-color': item.store.primaryColor}">
+        <ion-col col-2>
+          <img [src]="item.store.logo ? item.store.logo:defaultThumbnail" class="store-cart-thumbnail" />
+        </ion-col>
+        <ion-col col-6>
+          <h2 class="text-h2 cart-item-title">{{ item.store.storeName }}</h2>
+          <!-- <h3 class="cart-item-amount">Total: {{ item.store.storeTotalAmount }}</h3> -->
+        </ion-col>
+        <ion-col col-4 class="store-cart-quick-actions">
+          <button [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="openItemCustomNotes(item)"
+            class="store-list-btn-alt">
+            <ion-icon name="text"></ion-icon>
+          </button>
+          <button [ngStyle]="{'background-color': item.store.secondaryColor}" (click)="attachPrescription(item)"
+            class="store-list-btn-alt">
+            <ion-icon name="attach"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-grid>
+        <ion-card class="store-order-list">
+          <ion-card-content>
+            <ion-row class="store-order-item">
+              <ion-col col-50 class="store-order-title">Order No:</ion-col>
+              <ion-col col-50 class="store-order-desc">{{ item.orderList.orderId }}</ion-col>
+            </ion-row>
+            <ion-row class="store-order-item">
+              <ion-col col-50 class="store-order-title">Status:</ion-col>
+              <ion-col col-50 class="store-order-desc">{{ getStatus(item.orderList.status) }}</ion-col>
+            </ion-row>
+            <ion-row class="store-order-item">
+              <ion-col col-50 class="store-order-title">Order Amount:</ion-col>
+              <ion-col col-50 class="store-order-desc">{{ item.orderList.amount }}</ion-col>
+            </ion-row>
+            <ion-row class="store-order-item">
+              <ion-col col-50 class="store-order-title">Number of items:</ion-col>
+              <ion-col col-50 class="store-order-desc">{{ item.orderList.numberOfItems }}</ion-col>
+            </ion-row>
+            <ion-row>
+              <button (click)="orderItem(item.orderList, item.store)" class="store-action-btn" [ngStyle]="{'background-color': item.store.secondaryColor}">View</button>
+              <button *ngIf="item.orderList.status == 3 || item.orderList.status == 4" (click)="notifyStore(item.orderList)" class="store-action-btn" [ngStyle]="{'background-color': item.store.secondaryColor}"> Notify</button>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-grid>
+    </div>
+  </ion-list>
+</ion-content>

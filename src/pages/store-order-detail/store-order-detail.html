@@ -1,0 +1,85 @@
+<ion-header class="store-home-header" no-shadow no-border>
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-2 class="col-top-left">
+        <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-8 class="col-top-center">
+        <ion-title class="store-title">{{this.orderId}}</ion-title>
+      </ion-col>
+      <ion-col col-2 class="col-top-right">
+        <!-- <button ion-button icon-only (click)="chatBox()" class="store-icons">
+          <ion-icon name="chatboxes"></ion-icon>
+        </button> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-card *ngFor="let item of productList" class="order-detail-item">
+        <ion-card-content>
+          <ion-row>
+            <ion-col class="order-detail-image" col-6>
+              <img [src]="item.productImg ? item.productImg:defaultThumbnail" />
+            </ion-col>
+            <ion-col col-6 class="order-detail-info">
+              <ion-row class="order-detail-info-top">
+                <ion-col col-6>
+                  <ion-badge color="primary" class="order-detail-badge" item-end>{{ item.itemAmt | toFixed}}</ion-badge>
+                </ion-col>
+                <ion-col col-6>
+                  <button (click)="openItemCustomNotes(item)" class="store-list-btn order-detail-chat">
+                    <ion-icon name="text"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+              <ion-row class="order-detail-info-bottom">
+                <ion-col class="order-detail-product">{{item.productName}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="order-detail-price"> {{item.productSalesPrice}} x {{item.qty}}</ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="order-detail-content">
+            <ion-col>
+              <ion-row>
+                <ion-col col-6 class="order-detail-title">Status:</ion-col>
+                <ion-col col-6 class="order-detail-desc">{{ getStatus(item.itemStatus) }}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-6 class="order-detail-title">Picked Quantity:</ion-col>
+                <ion-col col-6 class="order-detail-desc"> {{item.pickedQty}}</ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-row *ngIf="this.isTotalCalculated" class="order-detail-receipt">
+      <ion-col class="order-detail-title" col-6>Total Cost:</ion-col>
+      <ion-col col-6 class="order-detail-amt">{{finalAmount}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--FIXME: commented out for the RP release-->
+  <!-- <ion-row>
+    <ion-col>
+      <label *ngIf="this.isPayable && count > 0" (click)="saveUnavailableItemsInShoppingMode()">Un available Quantity:{{count}}</label>
+    </ion-col>
+  </ion-row> -->
+
+  <!--FIXME: commented out for the RP release-->
+  <!-- <ion-row>
+    <ion-col>
+      <button *ngIf="this.isPayable" ion-button color="danger" block (click)="doPayment()">Payment</button>
+    </ion-col>
+  </ion-row> -->
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-header class="store-home-header" no-shadow no-border>
+  <ion-grid class="store-home-grid">
+    <ion-row class="top-wrapper">
+      <ion-col col-2 class="col-top-left">
+        <!-- <ion-buttons class="store-button-icons">
+          <button ion-button icon-only class="store-icon-back" (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons> -->
+      </ion-col>
+      <ion-col col-8 class="col-top-center">
+        <ion-title class="store-title">Store Receipts Filter</ion-title>
+      </ion-col>
+      <ion-col col-2 class="col-top-right">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Start date</ion-label>
+    <ion-datetime displayFormat="MMM/DD/YYYY" [(ngModel)]="sdate" (ionChange)="startDate(sdate)"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>End date</ion-label>
+    <ion-datetime displayFormat="MMM/DD/YYYY" [(ngModel)]="edate" (ionChange)="endDate(edate)"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Receipts Id</ion-label>
+    <ion-input type="text" [(ngModel)]="receiptsId" (ionChange)="receiptId(receiptsId)"></ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="danger" (click)="search()">Search</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion-button block color="danger" (click)="reset()">Reset</button>
+    </ion-col>
+  </ion-row>
+</ion-content>
